@@ -1,1 +1,0 @@
-#Django project to make food delivery app

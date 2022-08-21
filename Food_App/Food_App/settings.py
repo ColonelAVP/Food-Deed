@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-po!-x6a(3q)7rb3bky+fkhc28x4)k!o*d!n457d_$uy$c)g@*n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok.io", "ngrok"]
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "rest_framework",
+    "rest_framework.authtoken",
+    "knox",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,7 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.CustomUser"
+
+# REST_FRAMEWORK = {
+#     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated")
+# }
