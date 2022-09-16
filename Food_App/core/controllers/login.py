@@ -1,7 +1,5 @@
-import logging
-from os import stat
 from rest_framework.decorators import api_view
-from core.models import CustomUser
+from core.models import CustomUser, Restaurant
 from core.helpers.base import (
     BadRequestJSONResponse,
     SuccessJSONResponse,
@@ -76,7 +74,7 @@ class CustomUserController:
     @api_view(["GET"])
     def get_consent_screen(request):
         """
-        The get_consent_screen() API prompts google login consent window
+        The get_consent_screen() API prompts google login consent window.
         """
         success, response = get_consent_url()
         if not success:

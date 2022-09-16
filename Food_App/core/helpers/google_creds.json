@@ -5,9 +5,9 @@
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "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",
         "redirect_uris": [
-            "http://127.0.0.1:8000/api/google-user-data",
-            "https://08a6-103-26-226-10.ngrok.io/api/google-user-data"
+            "http://127.0.0.1:8000/api/google-user-data"
         ]
     }
 }

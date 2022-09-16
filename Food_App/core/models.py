@@ -1,6 +1,8 @@
+from pickle import TRUE
 import random
+from typing import Text
 from django.utils.translation import gettext
-from django.db import models
+from django.db.models import Model
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db.models import (
     Model,
@@ -10,8 +12,12 @@ from django.db.models import (
     CharField,
     JSONField,
     ForeignKey,
+    ImageField,
+    FloatField,
+    CASCADE,
+    ManyToManyField,
 )
-
+from core.helpers.constants import FoodCategoryTypes, FoodSubCategoryTypes
 from django_extensions.db.fields import CreationDateTimeField, ModificationDateTimeField
 from .managers import CustomUserManager
 
@@ -49,3 +55,63 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.mobile_number)
+
+
+class Food(Model):
+    """
+    Food model --> Contains details of a food item
+    """
+
+    food_category_choices = (
+        (FoodCategoryTypes.ASIAN, FoodCategoryTypes.ASIAN),
+        (FoodCategoryTypes.CHINESE, FoodCategoryTypes.CHINESE),
+        (FoodCategoryTypes.ITALIAN, FoodCategoryTypes.ITALIAN),
+        (FoodCategoryTypes.MEXICAN, FoodCategoryTypes.MEXICAN),
+        (FoodCategoryTypes.HAMBURGER, FoodCategoryTypes.HAMBURGER),
+    )
+
+    food_subcategory_choices = (
+        (FoodSubCategoryTypes.VEG, FoodSubCategoryTypes.VEG),
+        (FoodSubCategoryTypes.NON_VEG, FoodSubCategoryTypes.NON_VEG),
+    )
+
+    name = CharField(max_length=30)
+    image = ImageField(upload_to="food_images/", null=True, blank=True)
+    category = CharField(
+        max_length=10, choices=food_category_choices, default=FoodCategoryTypes.ASIAN
+    )
+    sub_category = CharField(
+        max_length=10,
+        choices=food_subcategory_choices,
+        default=FoodSubCategoryTypes.VEG,
+    )
+    price = FloatField(max_length=10)
+    # TODO CART (Many-to-many)
+    description = CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return str(f"{self.name} :: {self.sub_category}")
+
+
+class Review(Model):
+    """Review model for Restaurants where user can add multiple reviews."""
+
+    review = TextField(max_length=500, blank=True, null=True)
+
+
+class Restaurant(Model):
+    """
+    Restaurant model --> saves Restaurant instances in Database
+    """
+
+    name = CharField(max_length=150)
+    address = CharField(max_length=350)
+    key = CharField(max_length=5, unique=True)
+    phone_number = CharField(max_length=12, unique=True)
+    availability = BooleanField(default=True)
+    foods = ManyToManyField(Food, blank=True)
+    reviews = ManyToManyField(Review, blank=True)
+    description = CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.name)

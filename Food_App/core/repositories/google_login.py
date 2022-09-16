@@ -7,7 +7,6 @@ from core.helpers.base import get_or_create
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from core.helpers.constants import GoogleKeys
-
 # from base64 import urlsafe_b64decode
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import Flow
@@ -35,9 +34,7 @@ def get_consent_url():
     return True, auth_url
 
 
-def get_consent_callback(
-    access_code="4%2F0AdQt8qi5UKJuf_OlZr4kn4j46BVrM5k-W6KVusfBIsAsUGiGBgzRtX3ft4nw1GFFVEiYAQ",
-):
+def get_consent_callback(access_code):
     """
     Function to get Access token, refresh token, EmailID from redirect URL
     Parameters:

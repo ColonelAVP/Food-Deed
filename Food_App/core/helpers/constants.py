@@ -10,3 +10,25 @@ class GoogleKeys:
     GOOGLE_CLIENT_SECRET = "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"
     TOKEN_URI = "https://oauth2.googleapis.com/token"
     # CALLBACK_URL = "https://08a6-103-26-226-10.ngrok.io/api/google-user-data"
+
+
+class FoodCategoryTypes:
+    ASIAN = "ASIAN"
+    CHINESE = "CHINESE"
+    ITALIAN = "ITALIAN"
+    MEXICAN = "MEXICAN"
+    HAMBURGER = "HAMBURGER"
+
+
+class FoodSubCategoryTypes:
+    VEG = "VEG"
+    NON_VEG = "NON_VEG"
+
+
+RESTAURANT_KEYS = {
+    "GK": "Gaurav's kitchen",
+    "ASC": "Atherv's Snacks Corner",
+    "IC": "Indiana Chinese",
+    "TPP": "The Pizza Point",
+    "AD": "Asian Darbar",
+}
