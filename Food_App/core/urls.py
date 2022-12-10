@@ -39,4 +39,9 @@ urlpatterns = [
         RestaurantController.get_all_reviews,
         name="get-all-reviews",
     ),
+    path(
+        "get-user/",
+        RestaurantController.get_user_detail,
+        name="get-user",
+    ),
 ]

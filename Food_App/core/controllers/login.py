@@ -22,6 +22,8 @@ from core.repositories.google_login import (
     get_consent_callback,
 )
 
+from django.views.decorators.csrf import csrf_protect
+
 
 class CustomUserController:
     @staticmethod
@@ -96,3 +98,5 @@ class CustomUserController:
         _, token = AuthToken.objects.create(user=user)
         response = {"access_token": token}
         return SuccessJSONResponse(response)
+
+

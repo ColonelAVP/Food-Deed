@@ -1,5 +1,6 @@
 from pickle import TRUE
 import random
+from sys import maxsize
 from typing import Text
 from django.utils.translation import gettext
 from django.db.models import Model
@@ -16,6 +17,7 @@ from django.db.models import (
     FloatField,
     CASCADE,
     ManyToManyField,
+    IntegerField,
 )
 from core.helpers.constants import FoodCategoryTypes, FoodSubCategoryTypes
 from django_extensions.db.fields import CreationDateTimeField, ModificationDateTimeField
@@ -96,7 +98,15 @@ class Food(Model):
 class Review(Model):
     """Review model for Restaurants where user can add multiple reviews."""
 
+    rating_choices = (
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+    )
     review = TextField(max_length=500, blank=True, null=True)
+    rating = IntegerField(max_length=1, choices=rating_choices, blank=True, null=True)
 
 
 class Restaurant(Model):
@@ -115,3 +125,12 @@ class Restaurant(Model):
 
     def __str__(self):
         return str(self.name)
+
+
+# class Cart(Model):
+#     """
+#     Cart model --> Cart handles all the cart functionality
+#     """
+
+#     user = ForeignKey(CustomUser, on_delete=True)
+#     food_item = ForeignKey(Food, on_delete=True)

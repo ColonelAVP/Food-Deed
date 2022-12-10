@@ -25,6 +25,8 @@ def get_restaurant(key=None):
     """
     if key:
         restaurants = Restaurant.objects.filter(key=key)
+        reviews = restaurants.first().reviews
+        print(list(reviews.values()))
         if not restaurants:
             return False, "Restaurant not found"
     else:
